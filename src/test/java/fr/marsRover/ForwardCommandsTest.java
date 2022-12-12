@@ -4,37 +4,22 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class ForwardCommandsTest {
 
-    @Test
-    public void singleCommand() {
-        Rover rover = new Rover(0, 0, "N");
+    @ParameterizedTest
+    @CsvSource({"0,0,N,0,1", "0,1,N,0,2", "0,3,N,0,4"})
+    public void singleCommand(int initialX, int initialY, String initialDirection
+            , int expectedX, int expectedY) {
+        Rover rover = new Rover(initialX, initialY, initialDirection);
         rover.move("f");
 
-        Assertions.assertEquals(0, rover.getX());
-        Assertions.assertEquals(1, rover.getY());
+        Assertions.assertEquals(expectedX, rover.getX());
+        Assertions.assertEquals(expectedY, rover.getY());
         Assertions.assertEquals("N", rover.getDirection());
     }
 
-
-    @Test
-    public void singleCommand2() {
-        Rover rover = new Rover(0, 1, "N");
-        rover.move("f");
-
-        Assertions.assertEquals(0, rover.getX());
-        Assertions.assertEquals(2, rover.getY());
-        Assertions.assertEquals("N", rover.getDirection());
-    }
-
-    @Test
-    public void singleCommand3() {
-        Rover rover = new Rover(0, 3, "N");
-        rover.move("f");
-
-        Assertions.assertEquals(0, rover.getX());
-        Assertions.assertEquals(4, rover.getY());
-        Assertions.assertEquals("N", rover.getDirection());
-    }
+    
 }
