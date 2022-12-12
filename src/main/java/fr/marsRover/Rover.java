@@ -14,9 +14,7 @@ public class Rover {
     }
 
     public void move(String f) {
-        if (yPosition == 0 && "N".equals(currentDirection)) {
-            yPosition = yPosition + 1;
-        } else if (yPosition == 1 && "N".equals(currentDirection)) {
+        if ("N".equals(currentDirection)) {
             yPosition = yPosition + 1;
         }
     }
