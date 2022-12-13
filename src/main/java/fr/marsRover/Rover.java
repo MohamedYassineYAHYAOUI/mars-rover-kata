@@ -44,8 +44,11 @@ public class Rover {
                 advanceRoverByStep(-1);
             }
             if (upperCaseCommand == 'L') {
-                if (currentDirection == 'E') {
-                    currentDirection = 'N';
+                switch (currentDirection) {
+                    case 'E' -> currentDirection = 'N';
+                    case 'N' -> currentDirection = 'W';
+                    case 'W' -> currentDirection = 'S';
+                    default -> currentDirection = 'E';
                 }
             }
         }

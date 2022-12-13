@@ -11,14 +11,11 @@ public class TurnCommandsTest {
 
     @Ignore
     @ParameterizedTest
-    @CsvSource({"2,1,E,2,1,N,l"})
-    void turnLeft(int initialX, int initialY, char initialDirection,
-                  int expectedX, int expectedY, char expectedDirection, String commands) {
-        Rover rover = Rover.Create(initialX, initialY, initialDirection);
+    @CsvSource({"E,N,l", "N,W,l", "W,S,l", "S,E,l"})
+    void turnLeft(char initialDirection, char expectedDirection, String commands) {
+        Rover rover = Rover.Create(0, 0, initialDirection);
 
         rover.move(commands);
-        Assertions.assertEquals(expectedX, rover.getX());
-        Assertions.assertEquals(expectedY, rover.getY());
         Assertions.assertEquals(expectedDirection, rover.getDirection());
     }
 
