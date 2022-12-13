@@ -29,22 +29,14 @@ public class ForwardCommandsTest {
     @CsvSource({"2,1,E,3,1,f", "5,2,W,4,2,f"})
     public void singleXMovement(int initialX, int initialY, char initialDirection,
                                 int expectedX, int expectedY, String commands) {
-        Rover rover = Rover.Create(initialX, initialY, initialDirection);
-        rover.move(commands);
-
-        Assertions.assertEquals(expectedX, rover.getX());
-        Assertions.assertEquals(expectedY, rover.getY());
+        singleYMovement(initialX, initialY, initialDirection, expectedX, expectedY, commands);
     }
 
     @ParameterizedTest
     @CsvSource({"1,3,N,1,6,fff", "1,3,S,1,1,ff", "1,3,E,5,3,ffff", "3,3,W,0,3,fff"})
     public void multipleCommands(int initialX, int initialY, char initialDirection
             , int expectedX, int expectedY, String commands) {
-        Rover rover = Rover.Create(initialX, initialY, initialDirection);
-        rover.move(commands);
-
-        Assertions.assertEquals(expectedX, rover.getX());
-        Assertions.assertEquals(expectedY, rover.getY());
+        singleYMovement(initialX, initialY, initialDirection, expectedX, expectedY, commands);
     }
 
 
