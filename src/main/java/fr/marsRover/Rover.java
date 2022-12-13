@@ -43,6 +43,11 @@ public class Rover {
             if (upperCaseCommand == 'B') {
                 advanceRoverByStep(-1);
             }
+            if (upperCaseCommand == 'L') {
+                if (currentDirection == 'E') {
+                    currentDirection = 'N';
+                }
+            }
         }
     }
 
@@ -63,4 +68,7 @@ public class Rover {
         return yPosition;
     }
 
+    public char getDirection() {
+        return currentDirection;
+    }
 }
