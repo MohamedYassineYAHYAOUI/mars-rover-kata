@@ -36,14 +36,22 @@ public class Rover {
 
     public void move(String commands) {
         for (char command : commands.toCharArray()) {
-            if ('N' == currentDirection) {
-                yPosition++;
-            } else if ('S' == currentDirection) {
-                yPosition--;
-            } else if ('E' == currentDirection) {
-                xPosition++;
-            } else if ('W' == currentDirection) {
-                xPosition--;
+            char upperCaseCommand = Character.toUpperCase(command);
+            if (upperCaseCommand == 'F') {
+                switch (currentDirection) {
+                    case 'N' -> yPosition++;
+                    case 'S' -> yPosition--;
+                    case 'E' -> xPosition++;
+                    case 'W' -> xPosition--;
+                }
+            }
+            if (upperCaseCommand == 'B') {
+                switch (currentDirection) {
+                    case 'N' -> yPosition--;
+                    case 'S' -> yPosition++;
+                    case 'E' -> xPosition--;
+                    case 'W' -> xPosition++;
+                }
             }
         }
     }
@@ -56,7 +64,4 @@ public class Rover {
         return yPosition;
     }
 
-    public String getDirection() {
-        return "N";
-    }
 }
