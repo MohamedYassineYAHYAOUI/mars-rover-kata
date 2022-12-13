@@ -37,11 +37,6 @@ public class ForwardCommandsTest {
     @CsvSource({"0,0,L", "0,0,*", "0,0,!", "-1,5,W", "1,-8,N",})
     public void invalidInitialDirection(int initialX, int initialY, char initialDirection) {
         Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialX, initialY, initialDirection));
-        Assertions.assertAll(() -> {
-            Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, 'L'));
-            Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, '\t'));
-            Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, '*'));
-        });
     }
 
 
