@@ -25,5 +25,10 @@ public class TurnCommandsTest {
         turnLeftOnce(initialDirection, expectedDirection, commands);
     }
 
+    @ParameterizedTest
+    @CsvSource({"E,E,rrrr", "N,E,lll", "N,S,lrrrrl"})
+    void multipleTurns(char initialDirection, char expectedDirection, String commands) {
+        turnLeftOnce(initialDirection, expectedDirection, commands);
+    }
 
 }
