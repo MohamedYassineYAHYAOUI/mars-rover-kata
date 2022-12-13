@@ -30,7 +30,7 @@ public class Rover {
     }
 
     private static boolean isValidDirection(char direction) {
-        char upperCaseChar = Character.toLowerCase(direction);
+        char upperCaseChar = Character.toUpperCase(direction);
         return upperCaseChar != 'N' && upperCaseChar != 'S' && upperCaseChar != 'W' && upperCaseChar != 'E';
     }
 
