@@ -16,10 +16,13 @@ public class Rover {
     public void move(String commands) {
         for (char command : commands.toCharArray()) {
             if ("N".equals(currentDirection)) {
-                yPosition = yPosition + 1;
+                yPosition++;
             }
             if ("S".equals(currentDirection)) {
-                yPosition = yPosition - 1;
+                yPosition--;
+            }
+            if ("E".equals(currentDirection)) {
+                xPosition++;
             }
         }
     }
