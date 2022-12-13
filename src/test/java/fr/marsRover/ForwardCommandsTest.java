@@ -14,6 +14,12 @@ public class ForwardCommandsTest {
 
 
     @ParameterizedTest
+    @CsvSource({"0,0,L", "0,0,*", "0,0,!", "-1,5,W", "1,-8,N",})
+    public void invalidInitialDirection(int initialX, int initialY, char initialDirection) {
+        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialX, initialY, initialDirection));
+    }
+
+    @ParameterizedTest
     @CsvSource({"0,0,N,1,f", "0,1,N,2,f", "0,3,S,2,f", "6,4,S,3,f"})
     public void singleYMovement(int initialX, int initialY, char initialDirection
             , int expectedY, String commands) {
@@ -33,15 +39,9 @@ public class ForwardCommandsTest {
         Assertions.assertEquals(expectedX, rover.getX());
     }
 
-    @ParameterizedTest
-    @CsvSource({"0,0,L", "0,0,*", "0,0,!", "-1,5,W", "1,-8,N",})
-    public void invalidInitialDirection(int initialX, int initialY, char initialDirection) {
-        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialX, initialY, initialDirection));
-    }
-
 
     @ParameterizedTest
-    @CsvSource({"1,3,N,1,6,fff"})
+    @CsvSource({"1,3,N,1,6,fff", "1,3,S,1,0,fff", "1,3,E,4,3,fff", "3,3,W,0,3,fff"})
     public void multipleCommands(int initialX, int initialY, char initialDirection
             , int expectedX, int expectedY, String commands) {
         Rover rover = Rover.Create(initialX, initialY, initialDirection);
