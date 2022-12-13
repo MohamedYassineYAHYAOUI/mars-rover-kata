@@ -1,28 +1,37 @@
 package fr.marsRover;
 
+import java.security.InvalidParameterException;
+
 public class Rover {
 
     private int xPosition;
     private int yPosition;
-    private String currentDirection;
+    private char currentDirection;
 
-    public Rover(int xPosition, int yPosition, String direction) {
+    private Rover(int xPosition, int yPosition, char direction) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.currentDirection = direction;
+    }
 
+    public static Rover Create(int xPosition, int yPosition, char direction) {
+        if (direction != 'N' && direction != 'S' && direction != 'W' && direction != 'E') {
+            throw new InvalidParameterException("invalid initial direction");
+        }
+
+        return new Rover(xPosition, yPosition, direction);
     }
 
     public void move(String commands) {
         for (char command : commands.toCharArray()) {
-            if ("N".equals(currentDirection)) {
+            if ('N' == currentDirection) {
                 yPosition++;
-            }
-            if ("S".equals(currentDirection)) {
+            } else if ('S' == currentDirection) {
                 yPosition--;
-            }
-            if ("E".equals(currentDirection)) {
+            } else if ('E' == currentDirection) {
                 xPosition++;
+            } else if ('W' == currentDirection) {
+                xPosition--;
             }
         }
     }
