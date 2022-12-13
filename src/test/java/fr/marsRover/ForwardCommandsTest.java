@@ -33,11 +33,11 @@ public class ForwardCommandsTest {
         Assertions.assertEquals(expectedX, rover.getX());
     }
 
-    @Test
-    public void invalidInitialDirection() {
-
+    @ParameterizedTest
+    @CsvSource({"0,0,L", "0,0,*", "0,0,!", "-1,5,W", "1,-8,N",})
+    public void invalidInitialDirection(int initialX, int initialY, char initialDirection) {
+        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialX, initialY, initialDirection));
         Assertions.assertAll(() -> {
-            Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, ' '));
             Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, 'L'));
             Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, '\t'));
             Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(0, 0, '*'));
@@ -45,13 +45,12 @@ public class ForwardCommandsTest {
     }
 
 
-    //"2,1,N,2,4", "0,0,N,0,3"
     @ParameterizedTest
-    @CsvSource({"1,3,N,1,6"})
+    @CsvSource({"1,3,N,1,6,fff"})
     public void multipleCommands(int initialX, int initialY, char initialDirection
-            , int expectedX, int expectedY) {
+            , int expectedX, int expectedY, String commands) {
         Rover rover = Rover.Create(initialX, initialY, initialDirection);
-        rover.move("fff");
+        rover.move(commands);
 
         Assertions.assertEquals(expectedX, rover.getX());
         Assertions.assertEquals(expectedY, rover.getY());

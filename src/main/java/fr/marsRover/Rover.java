@@ -18,7 +18,9 @@ public class Rover {
         if (direction != 'N' && direction != 'S' && direction != 'W' && direction != 'E') {
             throw new InvalidParameterException("invalid initial direction");
         }
-
+        if (xPosition < 0 || yPosition < 0) {
+            throw new InvalidParameterException("invalid initial position");
+        }
         return new Rover(xPosition, yPosition, direction);
     }
 
