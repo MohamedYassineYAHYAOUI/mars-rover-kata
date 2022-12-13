@@ -38,21 +38,20 @@ public class Rover {
         for (char command : commands.toCharArray()) {
             char upperCaseCommand = Character.toUpperCase(command);
             if (upperCaseCommand == 'F') {
-                switch (currentDirection) {
-                    case 'N' -> yPosition++;
-                    case 'S' -> yPosition--;
-                    case 'E' -> xPosition++;
-                    case 'W' -> xPosition--;
-                }
+                advanceRoverByStep(1);
             }
             if (upperCaseCommand == 'B') {
-                switch (currentDirection) {
-                    case 'N' -> yPosition--;
-                    case 'S' -> yPosition++;
-                    case 'E' -> xPosition--;
-                    case 'W' -> xPosition++;
-                }
+                advanceRoverByStep(-1);
             }
+        }
+    }
+
+    private void advanceRoverByStep(int step) {
+        switch (currentDirection) {
+            case 'N' -> yPosition += step;
+            case 'S' -> yPosition -= step;
+            case 'E' -> xPosition += step;
+            case 'W' -> xPosition -= step;
         }
     }
 
