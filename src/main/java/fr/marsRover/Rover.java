@@ -37,29 +37,40 @@ public class Rover {
     public void move(String commands) {
         for (char command : commands.toCharArray()) {
             char upperCaseCommand = Character.toUpperCase(command);
-            if (upperCaseCommand == 'F') {
-                advanceRoverByStep(1);
+            switch (upperCaseCommand) {
+                case 'F' -> advanceRoverByStep(1);
+                case 'B' -> advanceRoverByStep(-1);
+                case 'L' -> turnLeft();
+                case 'R' -> turnRight();
             }
-            if (upperCaseCommand == 'B') {
-                advanceRoverByStep(-1);
-            }
-            if (upperCaseCommand == 'L') {
-                switch (currentDirection) {
-                    case 'E' -> currentDirection = 'N';
-                    case 'N' -> currentDirection = 'W';
-                    case 'W' -> currentDirection = 'S';
-                    default -> currentDirection = 'E';
-                }
-            }
+
+        }
+    }
+
+    private void turnRight() {
+        switch (currentDirection) {
+            case 'E' -> currentDirection = 'S';
+            case 'N' -> currentDirection = 'E';
+            case 'W' -> currentDirection = 'N';
+            case 'S' -> currentDirection = 'W';
+        }
+    }
+
+    private void turnLeft() {
+        switch (currentDirection) {
+            case 'E' -> currentDirection = 'N';
+            case 'N' -> currentDirection = 'W';
+            case 'W' -> currentDirection = 'S';
+            case 'S' -> currentDirection = 'E';
         }
     }
 
     private void advanceRoverByStep(int step) {
         switch (currentDirection) {
-            case 'N' -> yPosition += step;
-            case 'S' -> yPosition -= step;
             case 'E' -> xPosition += step;
+            case 'N' -> yPosition += step;
             case 'W' -> xPosition -= step;
+            case 'S' -> yPosition -= step;
         }
     }
 
