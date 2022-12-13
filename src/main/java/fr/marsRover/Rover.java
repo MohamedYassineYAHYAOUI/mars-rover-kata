@@ -14,8 +14,13 @@ public class Rover {
     }
 
     public void move(String commands) {
-        if ("N".equals(currentDirection)) {
-            yPosition = yPosition + 1;
+        for (char command : commands.toCharArray()) {
+            if ("N".equals(currentDirection)) {
+                yPosition = yPosition + 1;
+            }
+            if ("S".equals(currentDirection)) {
+                yPosition = yPosition - 1;
+            }
         }
     }
 
