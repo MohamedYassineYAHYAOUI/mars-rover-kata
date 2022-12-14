@@ -70,7 +70,11 @@ public class Rover {
 
     private void advanceRoverByStep(int step) {
         if (currentDirection == 'E') {
-            xPosition += step;
+            if (xPosition + step > grid.getGridWidth()) {
+                xPosition = 0;
+            } else {
+                xPosition += step;
+            }
         } else if (currentDirection == 'N') {
             yPosition += step;
         } else if (currentDirection == 'W') {
