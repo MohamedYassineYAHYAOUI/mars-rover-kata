@@ -12,7 +12,7 @@ public class WrappingEdgesTest {
 
 
     @Test
-    public void wrappingWestToEastFacingWest() {
+    public void should_return_correct_point_and_direction_when_wrapping_west_to_east_while_facing_west() {
 
         Rover rover = Rover.Create(new GridPoint(0, 0), 'N', testGrid);
 
@@ -24,7 +24,7 @@ public class WrappingEdgesTest {
 
 
     @Test
-    public void wrappingWestToEastFacingEast() {
+    public void should_return_correct_point_and_direction_when_wrapping_west_to_east_while_facing_east() {
         Rover rover = Rover.Create(new GridPoint(1, 5), 'N', testGrid);
 
         rover.move("RBB");
@@ -34,7 +34,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingEastToWestFacingEast() {
+    public void should_return_correct_point_and_direction_when_wrapping_east_to_west_while_facing_east() {
         Rover rover = Rover.Create(new GridPoint(TEST_GRID_WIDTH, 0), 'N', testGrid);
 
         rover.move("RF");
@@ -44,7 +44,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingEastToWestFacingWest() {
+    public void should_return_correct_point_and_direction_when_wrapping_east_to_west_while_facing_west() {
         Rover rover = Rover.Create(new GridPoint(7, 3), 'E', testGrid);
 
         rover.move("RRBBBB");
@@ -54,7 +54,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingNorthToSouthFacingNorth() {
+    public void should_return_correct_point_and_direction_when_wrapping_north_to_south_while_facing_north() {
         Rover rover = Rover.Create(new GridPoint(7, 8), 'N', testGrid);
 
         rover.move("FFFF");
@@ -64,7 +64,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingNorthToSouthFacingSouth() {
+    public void should_return_correct_point_and_direction_when_wrapping_north_to_south_while_facing_south() {
         Rover rover = Rover.Create(new GridPoint(7, 8), 'N', testGrid);
 
         rover.move("FFLFLB");
@@ -74,7 +74,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingSouthToNorthFacingSouth() {
+    public void should_return_correct_point_and_direction_when_wrapping_south_to_north_while_facing_south() {
         Rover rover = Rover.Create(new GridPoint(6, 2), 'N', testGrid);
 
         rover.move("RRFFF");
@@ -84,7 +84,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingSouthToNorthFacingNorth() {
+    public void should_return_correct_point_and_direction_when_wrapping_south_to_north_while_facing_north() {
         Rover rover = Rover.Create(new GridPoint(5, 1), 'S', testGrid);
 
         rover.move("RRBB");
