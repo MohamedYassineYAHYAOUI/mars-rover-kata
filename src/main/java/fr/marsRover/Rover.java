@@ -19,7 +19,7 @@ public class Rover {
         if (isValidDirection(direction)) {
             throw new InvalidParameterException("invalid initial direction");
         }
-        if (!grid.isValidPosition(position)) {
+        if (grid.isValidPosition(position)) {
             throw new InvalidParameterException("invalid initial position");
         }
         return new Rover(position, direction, grid);
@@ -77,7 +77,7 @@ public class Rover {
             newYPos = grid.nextVerticalPosition(newYPos, -step);
         }
         var newPos = new GridPosition(newXPos, newYPos);
-        if (!grid.isValidPosition(newPos)) {
+        if (grid.isValidPosition(newPos)) {
             throw new IllegalStateException("Obstacle on next position " + newPos);
         }
         position = new GridPosition(newXPos, newYPos);

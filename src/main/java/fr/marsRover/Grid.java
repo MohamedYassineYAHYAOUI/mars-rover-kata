@@ -17,7 +17,7 @@ public class Grid {
     }
 
     public boolean isValidPosition(GridPosition position) {
-        return isPositionInGrid(position.xPosition(), position.yPosition()) && positionWithNoObstacles(position);
+        return !isPositionInGrid(position.xPosition(), position.yPosition()) || !positionWithNoObstacles(position);
     }
 
     private boolean positionWithNoObstacles(GridPosition position) {
