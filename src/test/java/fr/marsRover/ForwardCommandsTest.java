@@ -25,8 +25,7 @@ public class ForwardCommandsTest {
         Rover rover = Rover.Create(initialPosition, initialDirection, testGrid);
         rover.move(commands);
 
-        Assertions.assertEquals(expectedX, rover.getX());
-        Assertions.assertEquals(expectedY, rover.getY());
+        Assertions.assertEquals(new GridPosition(expectedX, expectedY), rover.getPosition());
     }
 
     @ParameterizedTest

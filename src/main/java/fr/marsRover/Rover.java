@@ -79,12 +79,8 @@ public class Rover {
         position = new GridPosition(newXPos, newYPos);
     }
 
-    public int getX() {
-        return position.xPosition();
-    }
-
-    public int getY() {
-        return position.yPosition();
+    public GridPosition getPosition() {
+        return position;
     }
 
     public char getDirection() {

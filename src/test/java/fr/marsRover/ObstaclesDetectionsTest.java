@@ -31,8 +31,7 @@ public class ObstaclesDetectionsTest {
 
         rover.move("LLBBLFFRBBBRFFLF");
 
-        Assertions.assertEquals(0, rover.getX());
-        Assertions.assertEquals(4, rover.getY());
+        Assertions.assertEquals(new GridPosition(0, 4), rover.getPosition());
         Assertions.assertEquals('S', rover.getDirection());
     }
 }

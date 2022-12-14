@@ -15,8 +15,8 @@ public class WrappingEdgesTest {
         Rover rover = Rover.Create(new GridPosition(0, 0), 'N', testGrid);
 
         rover.move("LF");
-        Assertions.assertEquals(TEST_GRID_WIDTH, rover.getX());
-        Assertions.assertEquals(0, rover.getY());
+
+        Assertions.assertEquals(new GridPosition(TEST_GRID_WIDTH, 0), rover.getPosition());
         Assertions.assertEquals('W', rover.getDirection());
     }
 
@@ -26,8 +26,9 @@ public class WrappingEdgesTest {
         Rover rover = Rover.Create(new GridPosition(1, 5), 'N', testGrid);
 
         rover.move("RBB");
-        Assertions.assertEquals(TEST_GRID_WIDTH, rover.getX());
-        Assertions.assertEquals(5, rover.getY());
+
+        Assertions.assertEquals(new GridPosition(TEST_GRID_WIDTH, 5), rover.getPosition());
+
         Assertions.assertEquals('E', rover.getDirection());
     }
 
@@ -36,8 +37,9 @@ public class WrappingEdgesTest {
         Rover rover = Rover.Create(new GridPosition(TEST_GRID_WIDTH, 0), 'N', testGrid);
 
         rover.move("RF");
-        Assertions.assertEquals(0, rover.getX());
-        Assertions.assertEquals(0, rover.getY());
+
+        Assertions.assertEquals(new GridPosition(0, 0), rover.getPosition());
+
         Assertions.assertEquals('E', rover.getDirection());
     }
 
@@ -46,8 +48,9 @@ public class WrappingEdgesTest {
         Rover rover = Rover.Create(new GridPosition(7, 3), 'E', testGrid);
 
         rover.move("RRBBBB");
-        Assertions.assertEquals(0, rover.getX());
-        Assertions.assertEquals(3, rover.getY());
+
+        Assertions.assertEquals(new GridPosition(0, 3), rover.getPosition());
+
         Assertions.assertEquals('W', rover.getDirection());
     }
 
@@ -57,8 +60,8 @@ public class WrappingEdgesTest {
 
         rover.move("FFFF");
 
-        Assertions.assertEquals(7, rover.getX());
-        Assertions.assertEquals(1, rover.getY());
+        Assertions.assertEquals(new GridPosition(7, 1), rover.getPosition());
+
         Assertions.assertEquals('N', rover.getDirection());
     }
 
@@ -68,8 +71,8 @@ public class WrappingEdgesTest {
 
         rover.move("FFLFLB");
 
-        Assertions.assertEquals(6, rover.getX());
-        Assertions.assertEquals(0, rover.getY());
+        Assertions.assertEquals(new GridPosition(6, 0), rover.getPosition());
+
         Assertions.assertEquals('S', rover.getDirection());
     }
 
@@ -79,8 +82,8 @@ public class WrappingEdgesTest {
 
         rover.move("RRFFF");
 
-        Assertions.assertEquals(6, rover.getX());
-        Assertions.assertEquals(TEST_GRID_HEIGHT, rover.getY());
+        Assertions.assertEquals(new GridPosition(6, TEST_GRID_HEIGHT), rover.getPosition());
+
         Assertions.assertEquals('S', rover.getDirection());
     }
 
@@ -90,8 +93,8 @@ public class WrappingEdgesTest {
 
         rover.move("RRBB");
 
-        Assertions.assertEquals(5, rover.getX());
-        Assertions.assertEquals(TEST_GRID_HEIGHT, rover.getY());
+        Assertions.assertEquals(new GridPosition(5, TEST_GRID_HEIGHT), rover.getPosition());
+
         Assertions.assertEquals('N', rover.getDirection());
     }
 
