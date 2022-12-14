@@ -8,10 +8,9 @@ public class Rover {
     private GridPosition position;
     private char currentDirection;
 
-    private Rover(GridPosition position, char direction, Grid grid) {
-        this.position = position;
-        this.currentDirection = direction;
-        this.grid = grid;
+    private static boolean isValidDirection(char direction) {
+        char upperCaseChar = Character.toUpperCase(direction);
+        return upperCaseChar != 'N' && upperCaseChar != 'S' && upperCaseChar != 'W' && upperCaseChar != 'E';
     }
 
     public static Rover Create(GridPosition position, char direction, Grid grid) {
@@ -25,9 +24,10 @@ public class Rover {
         return new Rover(position, direction, grid);
     }
 
-    private static boolean isValidDirection(char direction) {
-        char upperCaseChar = Character.toUpperCase(direction);
-        return upperCaseChar != 'N' && upperCaseChar != 'S' && upperCaseChar != 'W' && upperCaseChar != 'E';
+    private Rover(GridPosition position, char direction, Grid grid) {
+        this.position = position;
+        this.currentDirection = direction;
+        this.grid = grid;
     }
 
     public void move(String commands) {
@@ -39,7 +39,6 @@ public class Rover {
                 case 'L' -> turnLeft();
                 case 'R' -> turnRight();
             }
-
         }
     }
 
@@ -64,24 +63,21 @@ public class Rover {
     private void advanceRoverByStep(int step) {
         int newXPos = position.xPosition();
         int newYPos = position.yPosition();
-        if (currentDirection == 'E') { // TODO refacto methode
-            newXPos = grid.nextHorizontalPosition(position.xPosition(), step);
+        switch (currentDirection) {
+            case 'E' -> newXPos = grid.nextHorizontalPosition(position.xPosition(), step);
+            case 'N' -> newYPos = grid.nextVerticalPosition(newYPos, step);
+            case 'W' -> newXPos = grid.nextHorizontalPosition(newXPos, -step);
+            case 'S' -> newYPos = grid.nextVerticalPosition(newYPos, -step);
         }
-        if (currentDirection == 'N') {
-            newYPos = grid.nextVerticalPosition(newYPos, step);
-        }
-        if (currentDirection == 'W') {
-            newXPos = grid.nextHorizontalPosition(newXPos, -step);
-        }
-        if (currentDirection == 'S') {
-            newYPos = grid.nextVerticalPosition(newYPos, -step);
-        }
-        var newPos = new GridPosition(newXPos, newYPos);
+        position = isFacingObstacle(new GridPosition(newXPos, newYPos));
+
+    }
+
+    private GridPosition isFacingObstacle(GridPosition newPos) {
         if (grid.isValidPosition(newPos)) {
             throw new IllegalStateException("Obstacle on next position " + newPos);
         }
-        position = new GridPosition(newXPos, newYPos);
-
+        return newPos;
     }
 
     public GridPosition getPosition() {

@@ -30,7 +30,7 @@ public class Grid {
 
 
     public int nextVerticalPosition(int yPosition, int step) {
-        if (yPosition + step > gridHeight) {
+        if (yPosition + step > gridHeight) { // TODO refacto
             return 0;
         }
         if (yPosition + step < 0) {

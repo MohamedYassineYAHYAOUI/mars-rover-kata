@@ -7,7 +7,6 @@ public class ObstaclesDetectionsTest {
 
 
     /* todo
-         Encounter obstacles on forward
          Encounter obstacles on backward
          Encounter obstacles on forward wrapping
          Encounter obstacles on backward wrapping
@@ -47,4 +46,6 @@ public class ObstaclesDetectionsTest {
         Assertions.assertThrows(IllegalStateException.class, () -> rover.move("FFRFFF"));
         Assertions.assertEquals(new GridPosition(1, 2), rover.getPosition());
     }
+
+    
 }
