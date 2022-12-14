@@ -8,17 +8,19 @@ import java.security.InvalidParameterException;
 
 public class ForwardCommandsTest {
 
+    private final Grid testGrid = new Grid(10, 10);
+
     @ParameterizedTest
     @CsvSource({"0,0,L", "0,0,*", "0,0,!", "-1,5,W", "1,-8,N",})
     public void invalidInitialDirection(int initialX, int initialY, char initialDirection) {
-        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialX, initialY, initialDirection));
+        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialX, initialY, initialDirection, testGrid));
     }
 
     @ParameterizedTest
     @CsvSource({"0,0,N,0,1,f", "0,1,N,0,2,f", "0,3,S,0,2,f", "6,4,S,6,3,f"})
     public void singleYMovement(int initialX, int initialY, char initialDirection,
                                 int expectedX, int expectedY, String commands) {
-        Rover rover = Rover.Create(initialX, initialY, initialDirection);
+        Rover rover = Rover.Create(initialX, initialY, initialDirection, testGrid);
         rover.move(commands);
 
         Assertions.assertEquals(expectedX, rover.getX());

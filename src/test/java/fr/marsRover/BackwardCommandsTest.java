@@ -6,12 +6,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class BackwardCommandsTest {
 
+    private final Grid testGrid = new Grid(10, 10);
 
     @ParameterizedTest
     @CsvSource({"1,1,N,1,0,b", "0,1,N,0,0,b", "0,3,S,0,4,b", "6,4,S,6,5,b"})
     public void singleYMovement(int initialX, int initialY, char initialDirection,
                                 int expectedX, int expectedY, String commands) {
-        Rover rover = Rover.Create(initialX, initialY, initialDirection);
+
+        Rover rover = Rover.Create(initialX, initialY, initialDirection, testGrid);
         rover.move(commands);
 
         Assertions.assertEquals(expectedY, rover.getY());

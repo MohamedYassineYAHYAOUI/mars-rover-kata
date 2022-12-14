@@ -6,11 +6,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class TurnCommandsTest {
 
+    private final Grid testGrid = new Grid(10, 10);
 
     @ParameterizedTest
     @CsvSource({"E,N,l", "N,W,l", "W,S,l", "S,E,l"})
     void turnLeftOnce(char initialDirection, char expectedDirection, String commands) {
-        Rover rover = Rover.Create(0, 0, initialDirection);
+        Rover rover = Rover.Create(0, 0, initialDirection, testGrid);
 
         rover.move(commands);
         Assertions.assertEquals(expectedDirection, rover.getDirection());

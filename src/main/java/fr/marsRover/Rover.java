@@ -4,25 +4,28 @@ import java.security.InvalidParameterException;
 
 public class Rover {
 
+    private final Grid grid;
 
     private int xPosition;
     private int yPosition;
     private char currentDirection;
 
-    private Rover(int xPosition, int yPosition, char direction) {
+    private Rover(int xPosition, int yPosition, char direction, Grid grid) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.currentDirection = direction;
+        this.grid = grid;
     }
 
-    public static Rover Create(int xPosition, int yPosition, char direction) {
+    public static Rover Create(int xPosition, int yPosition, char direction, Grid grid) {
+
         if (isValidDirection(direction)) {
             throw new InvalidParameterException("invalid initial direction");
         }
         if (isValidPosition(xPosition, yPosition)) {
             throw new InvalidParameterException("invalid initial position");
         }
-        return new Rover(xPosition, yPosition, direction);
+        return new Rover(xPosition, yPosition, direction, grid);
     }
 
     private static boolean isValidPosition(int xPosition, int yPosition) {
@@ -66,11 +69,19 @@ public class Rover {
     }
 
     private void advanceRoverByStep(int step) {
-        switch (currentDirection) {
-            case 'E' -> xPosition += step;
-            case 'N' -> yPosition += step;
-            case 'W' -> xPosition -= step;
-            case 'S' -> yPosition -= step;
+        if (currentDirection == 'E') {
+            xPosition += step;
+        } else if (currentDirection == 'N') {
+            yPosition += step;
+        } else if (currentDirection == 'W') {
+            if (xPosition - step < 0) {
+                xPosition = grid.getGridWidth();
+            } else {
+                xPosition -= step;
+            }
+
+        } else if (currentDirection == 'S') {
+            yPosition -= step;
         }
     }
 
