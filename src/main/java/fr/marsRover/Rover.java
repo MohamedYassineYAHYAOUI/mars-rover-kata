@@ -70,14 +70,25 @@ public class Rover {
     private void advanceRoverByStep(int step) {
         int newXPos = point.xPoint();
         int newYPos = point.yPoint();
-        switch (currentDirection) {
-            case 'E' -> newXPos = grid.nextHorizontalPoint(point.xPoint(), step);
-            case 'N' -> newYPos = grid.nextVerticalPoint(newYPos, step);
-            case 'W' -> newXPos = grid.nextHorizontalPoint(newXPos, -step);
-            case 'S' -> newYPos = grid.nextVerticalPoint(newYPos, -step);
+
+        if (isFacingTowards('E')) {
+            newXPos = grid.nextHorizontalPoint(point.xPoint(), step);
+        }
+        if (isFacingTowards('N')) {
+            newYPos = grid.nextVerticalPoint(newYPos, step);
+        }
+        if (isFacingTowards('W')) {
+            newXPos = grid.nextHorizontalPoint(newXPos, -step);
+        }
+        if (isFacingTowards('S')) {
+            newYPos = grid.nextVerticalPoint(newYPos, -step);
         }
         point = isFacingObstacle(new GridPoint(newXPos, newYPos));
 
+    }
+
+    private boolean isFacingTowards(char direction) {
+        return currentDirection == direction;
     }
 
     private GridPoint isFacingObstacle(GridPoint newPos) {
