@@ -7,7 +7,6 @@ public class ObstaclesDetectionsTest {
 
 
     /* todo
-         Encounter obstacles on backward
          Encounter obstacles on forward wrapping
          Encounter obstacles on backward wrapping
          Encounter -> sequence abort and return
@@ -36,7 +35,7 @@ public class ObstaclesDetectionsTest {
     }
 
     @Test
-    public void obstaclesEncounteredOnForward() {
+    public void obstaclesForward() {
         Grid testGrid = new Grid(10, 10);
         testGrid.obstacleOn(new GridPosition(2, 2));
 
@@ -45,7 +44,29 @@ public class ObstaclesDetectionsTest {
 
         Assertions.assertThrows(IllegalStateException.class, () -> rover.move("FFRFFF"));
         Assertions.assertEquals(new GridPosition(1, 2), rover.getPosition());
+        Assertions.assertEquals('E', rover.getDirection());
     }
 
-    
+    @Test
+    public void obstaclesBackwards() {
+        Grid testGrid = new Grid(10, 10);
+
+        testGrid.obstacleOn(new GridPosition(3, 2));
+        Rover rover = Rover.Create(new GridPosition(3, 0), 'N', testGrid);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> rover.move("RRBBB"));
+        Assertions.assertEquals(new GridPosition(3, 1), rover.getPosition());
+        Assertions.assertEquals('S', rover.getDirection());
+    }
+
+    @Test
+    public void obstaclesOnWrappingForward() {
+        Grid testGrid = new Grid(10, 10);
+        testGrid.obstacleOn(new GridPosition(5, 0));
+
+        Rover rover = Rover.Create(new GridPosition(5, 10), 'N', testGrid);
+        Assertions.assertThrows(IllegalStateException.class, () -> rover.move("F"));
+        Assertions.assertEquals(new GridPosition(5, 10), rover.getPosition());
+
+    }
 }
