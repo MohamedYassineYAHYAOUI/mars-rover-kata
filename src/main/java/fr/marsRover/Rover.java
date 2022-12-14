@@ -28,6 +28,7 @@ public class Rover {
         return new Rover(xPosition, yPosition, direction, grid);
     }
 
+    //TODO déplacer dans la grid
     private static boolean isValidPosition(int xPosition, int yPosition) {
         return xPosition < 0 || yPosition < 0;
     }
@@ -70,36 +71,16 @@ public class Rover {
 
     private void advanceRoverByStep(int step) {
         if (currentDirection == 'E') {
-            nextAvailableXPosition(step);
+            xPosition = grid.nextHorizontalPosition(xPosition, step);
         }
         if (currentDirection == 'N') {
-            nextAvailableYPosition(step);
+            yPosition = grid.nextVerticalPosition(yPosition, step);
         }
         if (currentDirection == 'W') {
-            nextAvailableXPosition(-step);
+            xPosition = grid.nextHorizontalPosition(xPosition, -step);
         }
         if (currentDirection == 'S') {
-            nextAvailableYPosition(-step);
-        }
-    }
-
-    private void nextAvailableYPosition(int step) {
-        if (yPosition + step > grid.getGridHeight()) {
-            yPosition = 0;
-        } else if (yPosition + step < 0) {
-            yPosition = grid.getGridHeight();
-        } else {
-            yPosition += step;
-        }
-    }
-
-    private void nextAvailableXPosition(int step) {
-        if (xPosition + step < 0) {
-            xPosition = grid.getGridWidth();
-        } else if (xPosition + step > grid.getGridWidth()) {
-            xPosition = 0;
-        } else {
-            xPosition += step;
+            yPosition = grid.nextVerticalPosition(yPosition, -step);
         }
     }
 
