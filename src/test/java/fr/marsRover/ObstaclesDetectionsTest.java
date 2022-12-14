@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ObstaclesDetectionsTest {
 
     @Test
-    public void NoObstaclesEncountered() {
+    public void should_return_correct_point_with_no_obstacles_encountered() {
         Grid testGrid = new Grid(10, 10);
 
         testGrid.obstacleOn(new GridPoint(0, 3));
@@ -26,7 +26,7 @@ public class ObstaclesDetectionsTest {
     }
 
     @Test
-    public void obstaclesForward() {
+    public void should_throw_when_encountering_obstacle_on_forward_and_abort_commands() {
         Grid testGrid = new Grid(10, 10);
         testGrid.obstacleOn(new GridPoint(2, 2));
 
@@ -39,7 +39,7 @@ public class ObstaclesDetectionsTest {
     }
 
     @Test
-    public void obstaclesBackwards() {
+    public void should_throw_when_encountering_obstacle_on_backward_and_abort_commands() {
         Grid testGrid = new Grid(10, 10);
 
         testGrid.obstacleOn(new GridPoint(3, 2));
@@ -51,7 +51,7 @@ public class ObstaclesDetectionsTest {
     }
 
     @Test
-    public void obstaclesOnWrappingForward() {
+    public void should_throw_when_encountering_obstacle_on_wrapping_forward_and_abort_commands() {
         Grid testGrid = new Grid(10, 10);
         testGrid.obstacleOn(new GridPoint(5, 0));
 
@@ -63,7 +63,7 @@ public class ObstaclesDetectionsTest {
     }
 
     @Test
-    public void obstaclesOnWrappingBackwards() {
+    public void should_throw_when_encountering_obstacle_on_wrapping_backwards_and_abort_commands() {
         Grid testGrid = new Grid(10, 10);
         testGrid.obstacleOn(new GridPoint(0, 6));
 
