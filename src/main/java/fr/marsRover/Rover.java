@@ -75,17 +75,25 @@ public class Rover {
             } else {
                 xPosition += step;
             }
-        } else if (currentDirection == 'N') {
+        }
+        if (currentDirection == 'N') {
             yPosition += step;
-        } else if (currentDirection == 'W') {
+        }
+        if (currentDirection == 'W') {
             if (xPosition - step < 0) {
                 xPosition = grid.getGridWidth();
             } else {
                 xPosition -= step;
             }
 
-        } else if (currentDirection == 'S') {
-            yPosition -= step;
+        }
+        if (currentDirection == 'S') {
+            if (yPosition - step > grid.getGridHeight()) {
+                yPosition = 0;
+            } else {
+                yPosition -= step;
+            }
+
         }
     }
 
