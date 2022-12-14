@@ -21,7 +21,7 @@ public class Grid {
     }
 
     private boolean positionWithNoObstacles(GridPosition position) {
-        return gridObstacles.stream().filter(position::equals).count() == 0;
+        return gridObstacles.stream().noneMatch(position::equals);
     }
 
     private boolean isPositionInGrid(int xPosition, int yPosition) {
