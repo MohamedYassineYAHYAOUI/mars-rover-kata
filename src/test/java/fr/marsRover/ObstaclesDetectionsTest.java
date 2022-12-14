@@ -7,7 +7,6 @@ public class ObstaclesDetectionsTest {
 
 
     /* todo
-         Encounter obstacles on forward wrapping
          Encounter obstacles on backward wrapping
          Encounter -> sequence abort and return
      */
@@ -65,8 +64,20 @@ public class ObstaclesDetectionsTest {
         testGrid.obstacleOn(new GridPosition(5, 0));
 
         Rover rover = Rover.Create(new GridPosition(5, 10), 'N', testGrid);
+
         Assertions.assertThrows(IllegalStateException.class, () -> rover.move("F"));
         Assertions.assertEquals(new GridPosition(5, 10), rover.getPosition());
 
+    }
+
+    @Test
+    public void obstaclesOnWrappingBackwards() {
+        Grid testGrid = new Grid(10, 10);
+        testGrid.obstacleOn(new GridPosition(0, 6));
+
+        Rover rover = Rover.Create(new GridPosition(10, 6), 'W', testGrid);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> rover.move("B"));
+        Assertions.assertEquals(new GridPosition(10, 6), rover.getPosition());
     }
 }
