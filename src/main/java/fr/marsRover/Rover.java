@@ -73,23 +73,23 @@ public class Rover {
             nextAvailableXPosition(step);
         }
         if (currentDirection == 'N') {
-            if (yPosition + step > grid.getGridHeight()) {
-                yPosition = 0;
-            } else {
-                yPosition += step;
-            }
+            nextAvailableYPosition(step);
         }
         if (currentDirection == 'W') {
             nextAvailableXPosition(-step);
-
         }
         if (currentDirection == 'S') {
-            if (yPosition - step > grid.getGridHeight()) {
-                yPosition = 0;
-            } else {
-                yPosition -= step;
-            }
+            nextAvailableYPosition(-step);
+        }
+    }
 
+    private void nextAvailableYPosition(int step) {
+        if (yPosition + step > grid.getGridHeight()) {
+            yPosition = 0;
+        } else if (yPosition + step < 0) {
+            yPosition = grid.getGridHeight();
+        } else {
+            yPosition += step;
         }
     }
 

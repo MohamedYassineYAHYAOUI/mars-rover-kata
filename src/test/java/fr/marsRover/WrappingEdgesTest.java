@@ -10,7 +10,7 @@ public class WrappingEdgesTest {
     private final Grid testGrid = new Grid(TEST_GRID_WIDTH, TEST_GRID_HEIGHT);
 
     @Test
-    public void wrappingLeftToRightOnForward() {
+    public void wrappingWestToEastFacingWest() {
         Rover rover = Rover.Create(0, 0, 'N', testGrid);
 
         rover.move("LF");
@@ -21,7 +21,7 @@ public class WrappingEdgesTest {
 
 
     @Test
-    public void wrappingLeftToRightOnBackward() {
+    public void wrappingWestToEastFacingEast() {
         Rover rover = Rover.Create(1, 5, 'N', testGrid);
 
         rover.move("RBB");
@@ -31,7 +31,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingRightToLeftOnForward() {
+    public void wrappingEastToWestFacingEast() {
         Rover rover = Rover.Create(10, 0, 'N', testGrid);
 
         rover.move("RF");
@@ -41,7 +41,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingRightToLeftOnBackward() {
+    public void wrappingEastToWestFacingWest() {
         Rover rover = Rover.Create(7, 3, 'E', testGrid);
 
         rover.move("RRBBBB");
@@ -51,7 +51,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingUpToDownOnForward() {
+    public void wrappingNorthToSouthFacingNorth() {
         Rover rover = Rover.Create(7, 8, 'N', testGrid);
 
         rover.move("FFFF");
@@ -62,7 +62,7 @@ public class WrappingEdgesTest {
     }
 
     @Test
-    public void wrappingUpToDownOnBackward() {
+    public void wrappingNorthToSouthFacingSouth() {
         Rover rover = Rover.Create(7, 8, 'N', testGrid);
 
         rover.move("FFLFLB");
@@ -72,5 +72,26 @@ public class WrappingEdgesTest {
         Assertions.assertEquals('S', rover.getDirection());
     }
 
+    @Test
+    public void wrappingSouthToNorthFacingSouth() {
+        Rover rover = Rover.Create(6, 2, 'N', testGrid);
+
+        rover.move("RRFFF");
+
+        Assertions.assertEquals(6, rover.getX());
+        Assertions.assertEquals(TEST_GRID_HEIGHT, rover.getY());
+        Assertions.assertEquals('S', rover.getDirection());
+    }
+
+    @Test
+    public void wrappingSouthToNorthFacingNorth() {
+        Rover rover = Rover.Create(5, 1, 'S', testGrid);
+
+        rover.move("RRBB");
+
+        Assertions.assertEquals(5, rover.getX());
+        Assertions.assertEquals(TEST_GRID_HEIGHT, rover.getY());
+        Assertions.assertEquals('N', rover.getDirection());
+    }
 
 }
