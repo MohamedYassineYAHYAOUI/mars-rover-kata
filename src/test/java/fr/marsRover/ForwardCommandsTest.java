@@ -1,5 +1,6 @@
 package fr.marsRover;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -40,6 +41,14 @@ public class ForwardCommandsTest {
     public void multipleCommands(int initialX, int initialY, char initialDirection
             , int expectedX, int expectedY, String commands) {
         singleYMovement(initialX, initialY, initialDirection, expectedX, expectedY, commands);
+    }
+
+    @Test
+    public void nullCommand() {
+        GridPosition initialPosition = new GridPosition(0, 0);
+        Rover rover = Rover.Create(initialPosition, 'N', testGrid);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rover.move(null));
+
     }
 
 

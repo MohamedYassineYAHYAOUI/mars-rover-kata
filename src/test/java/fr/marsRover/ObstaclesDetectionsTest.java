@@ -5,14 +5,6 @@ import org.junit.jupiter.api.Assertions;
 
 public class ObstaclesDetectionsTest {
 
-
-    /* todo
-         Encounter obstacles on backward wrapping
-         Encounter -> sequence abort and return
-     */
-
-
-
     @Test
     public void NoObstaclesEncountered() {
         Grid testGrid = new Grid(10, 10);

@@ -31,6 +31,9 @@ public class Rover {
     }
 
     public void move(String commands) {
+        if (commands == null || commands.isBlank()) {
+            throw new IllegalArgumentException("invalid Command");
+        }
         for (char command : commands.toCharArray()) {
             char upperCaseCommand = Character.toUpperCase(command);
             switch (upperCaseCommand) {
