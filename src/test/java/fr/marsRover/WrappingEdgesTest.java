@@ -1,7 +1,8 @@
 package fr.marsRover;
 
-import org.junit.Test;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WrappingEdgesTest {
 
@@ -9,56 +10,87 @@ public class WrappingEdgesTest {
     private static final int TEST_GRID_HEIGHT = 10;
     private final Grid testGrid = new Grid(TEST_GRID_WIDTH, TEST_GRID_HEIGHT);
 
-    private void wrappingTest(int initialXPosition, int initialYPosition, char initialDirection, String commands,
-                              int expectedXPosition, int expectedYPosition, char expectedDirection) {
-        Rover rover = Rover.Create(new GridPosition(initialXPosition, initialYPosition), initialDirection, testGrid);
-
-        rover.move(commands);
-
-        Assertions.assertEquals(new GridPosition(expectedXPosition, expectedYPosition), rover.getPosition());
-        Assertions.assertEquals(expectedDirection, rover.getDirection());
-    }
 
     @Test
     public void wrappingWestToEastFacingWest() {
 
-        wrappingTest(0, 0, 'N', "LF", TEST_GRID_WIDTH, 0, 'W');
+        Rover rover = Rover.Create(new GridPosition(0, 0), 'N', testGrid);
+
+        rover.move("LF");
+
+        Assertions.assertEquals(new GridPosition(TEST_GRID_WIDTH, 0), rover.getPosition());
+        Assertions.assertEquals('W', rover.getDirection());
     }
 
 
     @Test
     public void wrappingWestToEastFacingEast() {
-        wrappingTest(1, 5, 'N', "RBB", TEST_GRID_WIDTH, 5, 'E');
+        Rover rover = Rover.Create(new GridPosition(1, 5), 'N', testGrid);
+
+        rover.move("RBB");
+
+        Assertions.assertEquals(new GridPosition(TEST_GRID_WIDTH, 5), rover.getPosition());
+        Assertions.assertEquals('E', rover.getDirection());
     }
 
     @Test
     public void wrappingEastToWestFacingEast() {
-        wrappingTest(TEST_GRID_WIDTH, 0, 'N', "RF", 0, 0, 'E');
+        Rover rover = Rover.Create(new GridPosition(TEST_GRID_WIDTH, 0), 'N', testGrid);
+
+        rover.move("RF");
+
+        Assertions.assertEquals(new GridPosition(0, 0), rover.getPosition());
+        Assertions.assertEquals('E', rover.getDirection());
     }
 
     @Test
     public void wrappingEastToWestFacingWest() {
-        wrappingTest(7, 3, 'E', "RRBBBB", 0, 3, 'W');
+        Rover rover = Rover.Create(new GridPosition(7, 3), 'E', testGrid);
+
+        rover.move("RRBBBB");
+
+        Assertions.assertEquals(new GridPosition(0, 3), rover.getPosition());
+        Assertions.assertEquals('W', rover.getDirection());
     }
 
     @Test
     public void wrappingNorthToSouthFacingNorth() {
-        wrappingTest(7, 8, 'N', "FFFF", 7, 1, 'N');
+        Rover rover = Rover.Create(new GridPosition(7, 8), 'N', testGrid);
+
+        rover.move("FFFF");
+
+        Assertions.assertEquals(new GridPosition(7, 1), rover.getPosition());
+        Assertions.assertEquals('N', rover.getDirection());
     }
 
     @Test
     public void wrappingNorthToSouthFacingSouth() {
-        wrappingTest(7, 8, 'N', "FFLFLB", 6, 0, 'S');
+        Rover rover = Rover.Create(new GridPosition(7, 8), 'N', testGrid);
+
+        rover.move("FFLFLB");
+
+        Assertions.assertEquals(new GridPosition(6, 0), rover.getPosition());
+        Assertions.assertEquals('S', rover.getDirection());
     }
 
     @Test
     public void wrappingSouthToNorthFacingSouth() {
-        wrappingTest(6, 2, 'N', "RRFFF", 6, TEST_GRID_HEIGHT, 'S');
+        Rover rover = Rover.Create(new GridPosition(6, 2), 'N', testGrid);
+
+        rover.move("RRFFF");
+
+        Assertions.assertEquals(new GridPosition(6, TEST_GRID_HEIGHT), rover.getPosition());
+        Assertions.assertEquals('S', rover.getDirection());
     }
 
     @Test
     public void wrappingSouthToNorthFacingNorth() {
-        wrappingTest(5, 1, 'S', "RRBB", 5, TEST_GRID_HEIGHT, 'N');
+        Rover rover = Rover.Create(new GridPosition(5, 1), 'S', testGrid);
+
+        rover.move("RRBB");
+
+        Assertions.assertEquals(new GridPosition(5, TEST_GRID_HEIGHT), rover.getPosition());
+        Assertions.assertEquals('N', rover.getDirection());
     }
 
 
