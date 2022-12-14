@@ -5,7 +5,7 @@ import java.security.InvalidParameterException;
 public class Rover {
 
     private final Grid grid;
-    private GridPosition position;
+    private GridPoint point;
     private char currentDirection;
 
     private static boolean isValidDirection(char direction) {
@@ -13,19 +13,19 @@ public class Rover {
         return upperCaseChar != 'N' && upperCaseChar != 'S' && upperCaseChar != 'W' && upperCaseChar != 'E';
     }
 
-    public static Rover Create(GridPosition position, char direction, Grid grid) {
+    public static Rover Create(GridPoint point, char direction, Grid grid) {
 
         if (isValidDirection(direction)) {
             throw new InvalidParameterException("invalid initial direction");
         }
-        if (grid.isValidPosition(position)) {
-            throw new InvalidParameterException("invalid initial position");
+        if (grid.isValidPoint(point)) {
+            throw new InvalidParameterException("invalid initial point");
         }
-        return new Rover(position, direction, grid);
+        return new Rover(point, direction, grid);
     }
 
-    private Rover(GridPosition position, char direction, Grid grid) {
-        this.position = position;
+    private Rover(GridPoint point, char direction, Grid grid) {
+        this.point = point;
         this.currentDirection = direction;
         this.grid = grid;
     }
@@ -68,27 +68,27 @@ public class Rover {
     }
 
     private void advanceRoverByStep(int step) {
-        int newXPos = position.xPosition();
-        int newYPos = position.yPosition();
+        int newXPos = point.xPoint();
+        int newYPos = point.yPoint();
         switch (currentDirection) {
-            case 'E' -> newXPos = grid.nextHorizontalPosition(position.xPosition(), step);
-            case 'N' -> newYPos = grid.nextVerticalPosition(newYPos, step);
-            case 'W' -> newXPos = grid.nextHorizontalPosition(newXPos, -step);
-            case 'S' -> newYPos = grid.nextVerticalPosition(newYPos, -step);
+            case 'E' -> newXPos = grid.nextHorizontalPoint(point.xPoint(), step);
+            case 'N' -> newYPos = grid.nextVerticalPoint(newYPos, step);
+            case 'W' -> newXPos = grid.nextHorizontalPoint(newXPos, -step);
+            case 'S' -> newYPos = grid.nextVerticalPoint(newYPos, -step);
         }
-        position = isFacingObstacle(new GridPosition(newXPos, newYPos));
+        point = isFacingObstacle(new GridPoint(newXPos, newYPos));
 
     }
 
-    private GridPosition isFacingObstacle(GridPosition newPos) {
-        if (grid.isValidPosition(newPos)) {
-            throw new IllegalStateException("Obstacle on next position " + newPos);
+    private GridPoint isFacingObstacle(GridPoint newPos) {
+        if (grid.isValidPoint(newPos)) {
+            throw new IllegalStateException("Obstacle on next point " + newPos);
         }
         return newPos;
     }
 
-    public GridPosition getPosition() {
-        return position;
+    public GridPoint getPoint() {
+        return point;
     }
 
     public char getDirection() {

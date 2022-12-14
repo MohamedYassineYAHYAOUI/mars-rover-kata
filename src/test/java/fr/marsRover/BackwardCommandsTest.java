@@ -12,11 +12,11 @@ public class BackwardCommandsTest {
     @CsvSource({"1,1,N,1,0,b", "0,1,N,0,0,b", "0,3,S,0,4,b", "6,4,S,6,5,b"})
     public void singleYMovement(int initialX, int initialY, char initialDirection,
                                 int expectedX, int expectedY, String commands) {
-        GridPosition initialPosition = new GridPosition(initialX, initialY);
-        Rover rover = Rover.Create(initialPosition, initialDirection, testGrid);
+        GridPoint initialPoint = new GridPoint(initialX, initialY);
+        Rover rover = Rover.Create(initialPoint, initialDirection, testGrid);
         rover.move(commands);
 
-        Assertions.assertEquals(new GridPosition(expectedX, expectedY), rover.getPosition());
+        Assertions.assertEquals(new GridPoint(expectedX, expectedY), rover.getPoint());
     }
 
     @ParameterizedTest

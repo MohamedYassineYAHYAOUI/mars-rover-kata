@@ -8,7 +8,7 @@ public class Grid {
     private final int gridWidth;
     private final int gridHeight;
 
-    private final List<GridPosition> gridObstacles = new ArrayList<>();
+    private final List<GridPoint> gridObstacles = new ArrayList<>();
 
 
     public Grid(int gridWidth, int gridHeight) {
@@ -16,41 +16,41 @@ public class Grid {
         this.gridHeight = gridHeight;
     }
 
-    public boolean isValidPosition(GridPosition position) {
-        return !isPositionInGrid(position.xPosition(), position.yPosition()) || !positionWithNoObstacles(position);
+    public boolean isValidPoint(GridPoint point) {
+        return !isPointInGrid(point.xPoint(), point.yPoint()) || !pointWithNoObstacles(point);
     }
 
-    private boolean positionWithNoObstacles(GridPosition position) {
-        return gridObstacles.stream().noneMatch(position::equals);
+    private boolean pointWithNoObstacles(GridPoint point) {
+        return gridObstacles.stream().noneMatch(point::equals);
     }
 
-    private boolean isPositionInGrid(int xPosition, int yPosition) {
-        return xPosition >= 0 && yPosition >= 0 && xPosition <= gridWidth && yPosition <= gridHeight;
+    private boolean isPointInGrid(int xPoint, int yPoint) {
+        return xPoint >= 0 && yPoint >= 0 && xPoint <= gridWidth && yPoint <= gridHeight;
     }
 
 
-    public int nextVerticalPosition(int yPosition, int step) {
-        if (yPosition + step > gridHeight) {
+    public int nextVerticalPoint(int ypoint, int step) {
+        if (ypoint + step > gridHeight) {
             return 0;
         }
-        if (yPosition + step < 0) {
+        if (ypoint + step < 0) {
             return gridHeight;
         }
-        return yPosition + step;
+        return ypoint + step;
     }
 
-    public int nextHorizontalPosition(int xPosition, int step) {
-        if (xPosition + step > gridWidth) {
+    public int nextHorizontalPoint(int xpoint, int step) {
+        if (xpoint + step > gridWidth) {
             return 0;
         }
-        if (xPosition + step < 0) {
+        if (xpoint + step < 0) {
             return gridWidth;
         }
-        return xPosition + step;
+        return xpoint + step;
     }
 
-    public void obstacleOn(GridPosition position) {
-        gridObstacles.add(position);
+    public void obstacleOn(GridPoint point) {
+        gridObstacles.add(point);
     }
 }
 

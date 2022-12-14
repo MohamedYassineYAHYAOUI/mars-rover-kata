@@ -15,19 +15,19 @@ public class ForwardCommandsTest {
     @ParameterizedTest
     @CsvSource({"0,0,L", "0,0,*", "0,0,!", "-1,5,W", "1,-8,N",})
     public void invalidInitialDirection(int initialX, int initialY, char initialDirection) {
-        GridPosition initialPosition = new GridPosition(initialX, initialY);
-        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialPosition, initialDirection, testGrid));
+        GridPoint initialpoint = new GridPoint(initialX, initialY);
+        Assertions.assertThrows(InvalidParameterException.class, () -> Rover.Create(initialpoint, initialDirection, testGrid));
     }
 
     @ParameterizedTest
     @CsvSource({"0,0,N,0,1,f", "0,1,N,0,2,f", "0,3,S,0,2,f", "6,4,S,6,3,f"})
     public void singleYMovement(int initialX, int initialY, char initialDirection,
                                 int expectedX, int expectedY, String commands) {
-        GridPosition initialPosition = new GridPosition(initialX, initialY);
-        Rover rover = Rover.Create(initialPosition, initialDirection, testGrid);
+        GridPoint initialPoint = new GridPoint(initialX, initialY);
+        Rover rover = Rover.Create(initialPoint, initialDirection, testGrid);
         rover.move(commands);
 
-        Assertions.assertEquals(new GridPosition(expectedX, expectedY), rover.getPosition());
+        Assertions.assertEquals(new GridPoint(expectedX, expectedY), rover.getPoint());
     }
 
     @ParameterizedTest
@@ -46,8 +46,8 @@ public class ForwardCommandsTest {
 
     @Test
     public void nullCommand() {
-        GridPosition initialPosition = new GridPosition(0, 0);
-        Rover rover = Rover.Create(initialPosition, 'N', testGrid);
+        GridPoint initialPoint = new GridPoint(0, 0);
+        Rover rover = Rover.Create(initialPoint, 'N', testGrid);
         Assertions.assertThrows(IllegalArgumentException.class, () -> rover.move(null));
 
     }
