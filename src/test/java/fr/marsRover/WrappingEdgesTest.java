@@ -94,4 +94,5 @@ public class WrappingEdgesTest {
         Assertions.assertEquals('N', rover.getDirection());
     }
 
+
 }

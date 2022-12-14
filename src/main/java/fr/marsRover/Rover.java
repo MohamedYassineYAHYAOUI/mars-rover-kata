@@ -22,15 +22,10 @@ public class Rover {
         if (isValidDirection(direction)) {
             throw new InvalidParameterException("invalid initial direction");
         }
-        if (isValidPosition(xPosition, yPosition)) {
+        if (!grid.isValidPosition(xPosition, yPosition)) {
             throw new InvalidParameterException("invalid initial position");
         }
         return new Rover(xPosition, yPosition, direction, grid);
-    }
-
-    //TODO déplacer dans la grid
-    private static boolean isValidPosition(int xPosition, int yPosition) {
-        return xPosition < 0 || yPosition < 0;
     }
 
     private static boolean isValidDirection(char direction) {
