@@ -29,24 +29,22 @@ public class Grid {
     }
 
 
-    public int nextVerticalPoint(int ypoint, int step) {
-        if (ypoint + step > gridHeight) {
-            return 0;
-        }
-        if (ypoint + step < 0) {
-            return gridHeight;
-        }
-        return ypoint + step;
+    public int nextVerticalPoint(int yPoint, int step) {
+        return nextPoint(yPoint, step, gridHeight);
     }
 
-    public int nextHorizontalPoint(int xpoint, int step) {
-        if (xpoint + step > gridWidth) {
+    public int nextHorizontalPoint(int xPoint, int step) {
+        return nextPoint(xPoint, step, gridWidth);
+    }
+
+    private int nextPoint(int coordinate, int step, int gridDimension) {
+        if (coordinate + step > gridDimension) {
             return 0;
         }
-        if (xpoint + step < 0) {
-            return gridWidth;
+        if (coordinate + step < 0) {
+            return gridDimension;
         }
-        return xpoint + step;
+        return coordinate + step;
     }
 
     public void obstacleOn(GridPoint point) {
