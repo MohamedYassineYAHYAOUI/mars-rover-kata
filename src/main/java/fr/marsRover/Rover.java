@@ -5,27 +5,24 @@ import java.security.InvalidParameterException;
 public class Rover {
 
     private final Grid grid;
-
-    private int xPosition;
-    private int yPosition;
+    private GridPosition position;
     private char currentDirection;
 
-    private Rover(int xPosition, int yPosition, char direction, Grid grid) {
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+    private Rover(GridPosition position, char direction, Grid grid) {
+        this.position = position;
         this.currentDirection = direction;
         this.grid = grid;
     }
 
-    public static Rover Create(int xPosition, int yPosition, char direction, Grid grid) {
+    public static Rover Create(GridPosition position, char direction, Grid grid) {
 
         if (isValidDirection(direction)) {
             throw new InvalidParameterException("invalid initial direction");
         }
-        if (!grid.isValidPosition(xPosition, yPosition)) {
+        if (!grid.isValidPosition(position)) {
             throw new InvalidParameterException("invalid initial position");
         }
-        return new Rover(xPosition, yPosition, direction, grid);
+        return new Rover(position, direction, grid);
     }
 
     private static boolean isValidDirection(char direction) {
@@ -65,26 +62,29 @@ public class Rover {
     }
 
     private void advanceRoverByStep(int step) {
+        int newXPos = position.xPosition();
+        int newYPos = position.yPosition();
         if (currentDirection == 'E') {
-            xPosition = grid.nextHorizontalPosition(xPosition, step);
+            newXPos = grid.nextHorizontalPosition(position.xPosition(), step);
         }
         if (currentDirection == 'N') {
-            yPosition = grid.nextVerticalPosition(yPosition, step);
+            newYPos = grid.nextVerticalPosition(newYPos, step);
         }
         if (currentDirection == 'W') {
-            xPosition = grid.nextHorizontalPosition(xPosition, -step);
+            newXPos = grid.nextHorizontalPosition(newXPos, -step);
         }
         if (currentDirection == 'S') {
-            yPosition = grid.nextVerticalPosition(yPosition, -step);
+            newYPos = grid.nextVerticalPosition(newYPos, -step);
         }
+        position = new GridPosition(newXPos, newYPos);
     }
 
     public int getX() {
-        return xPosition;
+        return position.xPosition();
     }
 
     public int getY() {
-        return yPosition;
+        return position.yPosition();
     }
 
     public char getDirection() {

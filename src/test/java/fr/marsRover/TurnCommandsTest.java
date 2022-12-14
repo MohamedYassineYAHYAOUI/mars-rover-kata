@@ -11,7 +11,8 @@ public class TurnCommandsTest {
     @ParameterizedTest
     @CsvSource({"E,N,l", "N,W,l", "W,S,l", "S,E,l"})
     void turnLeftOnce(char initialDirection, char expectedDirection, String commands) {
-        Rover rover = Rover.Create(0, 0, initialDirection, testGrid);
+        GridPosition initialPosition = new GridPosition(0, 0);
+        Rover rover = Rover.Create(initialPosition, initialDirection, testGrid);
 
         rover.move(commands);
         Assertions.assertEquals(expectedDirection, rover.getDirection());

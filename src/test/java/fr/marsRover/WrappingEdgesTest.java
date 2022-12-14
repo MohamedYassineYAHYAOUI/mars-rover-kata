@@ -11,7 +11,8 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingWestToEastFacingWest() {
-        Rover rover = Rover.Create(0, 0, 'N', testGrid);
+
+        Rover rover = Rover.Create(new GridPosition(0, 0), 'N', testGrid);
 
         rover.move("LF");
         Assertions.assertEquals(TEST_GRID_WIDTH, rover.getX());
@@ -22,7 +23,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingWestToEastFacingEast() {
-        Rover rover = Rover.Create(1, 5, 'N', testGrid);
+        Rover rover = Rover.Create(new GridPosition(1, 5), 'N', testGrid);
 
         rover.move("RBB");
         Assertions.assertEquals(TEST_GRID_WIDTH, rover.getX());
@@ -32,7 +33,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingEastToWestFacingEast() {
-        Rover rover = Rover.Create(10, 0, 'N', testGrid);
+        Rover rover = Rover.Create(new GridPosition(TEST_GRID_WIDTH, 0), 'N', testGrid);
 
         rover.move("RF");
         Assertions.assertEquals(0, rover.getX());
@@ -42,7 +43,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingEastToWestFacingWest() {
-        Rover rover = Rover.Create(7, 3, 'E', testGrid);
+        Rover rover = Rover.Create(new GridPosition(7, 3), 'E', testGrid);
 
         rover.move("RRBBBB");
         Assertions.assertEquals(0, rover.getX());
@@ -52,7 +53,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingNorthToSouthFacingNorth() {
-        Rover rover = Rover.Create(7, 8, 'N', testGrid);
+        Rover rover = Rover.Create(new GridPosition(7, 8), 'N', testGrid);
 
         rover.move("FFFF");
 
@@ -63,7 +64,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingNorthToSouthFacingSouth() {
-        Rover rover = Rover.Create(7, 8, 'N', testGrid);
+        Rover rover = Rover.Create(new GridPosition(7, 8), 'N', testGrid);
 
         rover.move("FFLFLB");
 
@@ -74,7 +75,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingSouthToNorthFacingSouth() {
-        Rover rover = Rover.Create(6, 2, 'N', testGrid);
+        Rover rover = Rover.Create(new GridPosition(6, 2), 'N', testGrid);
 
         rover.move("RRFFF");
 
@@ -85,7 +86,7 @@ public class WrappingEdgesTest {
 
     @Test
     public void wrappingSouthToNorthFacingNorth() {
-        Rover rover = Rover.Create(5, 1, 'S', testGrid);
+        Rover rover = Rover.Create(new GridPosition(5, 1), 'S', testGrid);
 
         rover.move("RRBB");
 

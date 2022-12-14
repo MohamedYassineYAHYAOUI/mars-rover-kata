@@ -1,9 +1,14 @@
 package fr.marsRover;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Grid {
 
     private final int gridWidth;
     private final int gridHeight;
+
+    private final List<GridPosition> gridObstacles = new ArrayList<>();
 
 
     public Grid(int gridWidth, int gridHeight) {
@@ -11,8 +16,8 @@ public class Grid {
         this.gridHeight = gridHeight;
     }
 
-    public boolean isValidPosition(int xPosition, int yPosition) {
-        return isPositionInGrid(xPosition, yPosition);
+    public boolean isValidPosition(GridPosition position) {
+        return isPositionInGrid(position.xPosition(), position.yPosition());
     }
 
     private boolean isPositionInGrid(int xPosition, int yPosition) {
@@ -40,5 +45,8 @@ public class Grid {
         return xPosition + step;
     }
 
+    public void obstacleOn(GridPosition position) {
+        gridObstacles.add(position);
+    }
 }
 
