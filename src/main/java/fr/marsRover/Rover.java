@@ -64,7 +64,7 @@ public class Rover {
     private void advanceRoverByStep(int step) {
         int newXPos = position.xPosition();
         int newYPos = position.yPosition();
-        if (currentDirection == 'E') {
+        if (currentDirection == 'E') { // TODO refacto methode
             newXPos = grid.nextHorizontalPosition(position.xPosition(), step);
         }
         if (currentDirection == 'N') {
@@ -76,7 +76,12 @@ public class Rover {
         if (currentDirection == 'S') {
             newYPos = grid.nextVerticalPosition(newYPos, -step);
         }
+        var newPos = new GridPosition(newXPos, newYPos);
+        if (!grid.isValidPosition(newPos)) {
+            throw new IllegalStateException("Obstacle on next position " + newPos);
+        }
         position = new GridPosition(newXPos, newYPos);
+
     }
 
     public GridPosition getPosition() {

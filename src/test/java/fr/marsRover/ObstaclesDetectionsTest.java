@@ -15,6 +15,7 @@ public class ObstaclesDetectionsTest {
      */
 
 
+
     @Test
     public void NoObstaclesEncountered() {
         Grid testGrid = new Grid(10, 10);
@@ -33,5 +34,17 @@ public class ObstaclesDetectionsTest {
 
         Assertions.assertEquals(new GridPosition(0, 4), rover.getPosition());
         Assertions.assertEquals('S', rover.getDirection());
+    }
+
+    @Test
+    public void obstaclesEncounteredOnForward() {
+        Grid testGrid = new Grid(10, 10);
+        testGrid.obstacleOn(new GridPosition(2, 2));
+
+        GridPosition initialPosition = new GridPosition(0, 0);
+        Rover rover = Rover.Create(initialPosition, 'N', testGrid);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> rover.move("FFRFFF"));
+        Assertions.assertEquals(new GridPosition(1, 2), rover.getPosition());
     }
 }

@@ -17,7 +17,11 @@ public class Grid {
     }
 
     public boolean isValidPosition(GridPosition position) {
-        return isPositionInGrid(position.xPosition(), position.yPosition());
+        return isPositionInGrid(position.xPosition(), position.yPosition()) && positionWithNoObstacles(position);
+    }
+
+    private boolean positionWithNoObstacles(GridPosition position) {
+        return gridObstacles.stream().filter(position::equals).count() == 0;
     }
 
     private boolean isPositionInGrid(int xPosition, int yPosition) {
